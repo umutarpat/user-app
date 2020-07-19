@@ -1,0 +1,121 @@
+<form [formGroup]="addForm">
+  <div class="wrapper">
+    <button
+      routerLink="/userlist"
+      style="float: right;"
+      mat-button
+      mat-icon-button
+    >
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <div class="title">
+      <h1>Yeni Kullanıcı</h1>
+    </div>
+
+    <div class="input-fields">
+      <input
+        formControlName="name"
+        type="text"
+        class="input"
+        placeholder="Adı"
+      />
+
+      <div
+        *ngIf="!errorFree && addForm.controls['name'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!addForm.controls['name'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          addForm.controls['name'].errors &&
+          !addForm.controls['name'].pristine &&
+          addForm.controls['name'].value != ''
+        "
+        class="error-msg"
+      >
+        <div [hidden]="!addForm.controls['name'].errors.maxlength">
+          Girilen değer 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <input
+        formControlName="tc"
+        type="text"
+        class="input"
+        placeholder="T.C Kimlik"
+        name="tcCode"
+        id="tcCode"
+        maxlength="11"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        digitOnly
+      />
+
+      <div
+        *ngIf="!errorFree && addForm.controls['tc'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!addForm.controls['tc'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div
+        *ngIf="addForm.controls['tc'].errors && addForm.controls['tc'].dirty"
+        class="error-msg"
+      >
+        <div [hidden]="!addForm.controls.SubMercMobileNo.hasError('minlength')">
+          Kimlik numarası 11 karakterden oluşmalıdır.
+        </div>
+      </div>
+
+      <input
+        formControlName="position"
+        type="text"
+        class="input"
+        placeholder="Pozisyon"
+      />
+
+      <div
+        *ngIf="!errorFree && addForm.controls['position'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!addForm.controls['position'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div *ngIf="addForm.controls['position'].errors" class="error-msg">
+        <div [hidden]="!addForm.controls['position'].errors.maxlength">
+          Girilen değer 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <div class="bottomFormWrapper">
+        <div class="switchContainer">
+          <label for="durum">Durum</label>
+          <input
+            formControlName="status"
+            id="durum"
+            type="checkbox"
+            class="toggle"
+          />
+        </div>
+
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          style="float: right; width: 150px; height: 50px;"
+          (click)="sendData(addForm.value)"
+        >
+          Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

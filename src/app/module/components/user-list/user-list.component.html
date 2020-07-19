@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <mat-form-field class="example-full-width">
+    <mat-label>Ara</mat-label>
+    <input type="text" matInput (keyup)="applyFilter($event)" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <button mat-button mat-icon-button routerLink="../add">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<app-user-table></app-user-table>

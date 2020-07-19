@@ -1,0 +1,122 @@
+<form [formGroup]="editForm">
+  <div class="wrapper">
+    <button
+      routerLink="/userlist"
+      style="float: right;"
+      mat-button
+      mat-icon-button
+    >
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <div class="title">
+      <h1>Kullanıcı Düzenleme</h1>
+    </div>
+    <div class="input-fields">
+      <input
+        formControlName="name"
+        type="text"
+        class="input"
+        placeholder="Adı"
+      />
+
+      <div
+        *ngIf="!errorFree && editForm.controls['name'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!editForm.controls['name'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          editForm.controls['name'].errors &&
+          !editForm.controls['name'].pristine &&
+          editForm.controls['name'].value != ''
+        "
+        class="error-msg"
+      >
+        <div [hidden]="!editForm.controls['name'].errors.maxlength">
+          Girilen değer 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <input
+        formControlName="tc"
+        type="text"
+        class="input"
+        placeholder="T.C Kimlik"
+        name="tcCode"
+        id="tcCode"
+        maxlength="11"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        digitOnly
+      />
+
+      <div
+        *ngIf="!errorFree && editForm.controls['tc'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!editForm.controls['tc'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div
+        *ngIf="editForm.controls['tc'].errors && editForm.controls['tc'].dirty"
+        class="error-msg"
+      >
+        <div
+          [hidden]="!editForm.controls.SubMercMobileNo.hasError('minlength')"
+        >
+          Kimlik numarası 11 karakterden oluşmalıdır.
+        </div>
+      </div>
+
+      <input
+        formControlName="position"
+        type="text"
+        class="input"
+        placeholder="Pozisyon"
+      />
+
+      <div
+        *ngIf="!errorFree && editForm.controls['position'].value == ''"
+        class="error-msg"
+      >
+        <div [hidden]="!editForm.controls['position'].errors.required">
+          Alan zorunludur.
+        </div>
+      </div>
+
+      <div *ngIf="editForm.controls['position'].errors" class="error-msg">
+        <div [hidden]="!editForm.controls['position'].errors.maxlength">
+          Girilen değer 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <div class="bottomFormWrapper">
+        <div class="switchContainer">
+          <label for="durum">Durum</label>
+          <input
+            formControlName="status"
+            id="durum"
+            type="checkbox"
+            class="toggle"
+          />
+        </div>
+
+        <button
+          mat-raised-button
+          color="warn"
+          type="button"
+          style="float: right; width: 150px; height: 50px;"
+          (click)="editData(editForm.value)"
+        >
+          Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

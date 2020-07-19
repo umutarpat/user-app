@@ -1,0 +1,13 @@
+<div class="container">
+  <h3 mat-dialog-title>Kayıt Silme</h3>
+  <div mat-dialog-content>
+    Adı "{{ local_data.name }}" olan kayıt kalıcı olarak silinsin mi ?
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="1" (click)="confirmDelete()">
+      Sil
+    </button>
+    <button mat-button (click)="closeDialog()" tabindex="-1">İptal</button>
+  </div>
+</div>
